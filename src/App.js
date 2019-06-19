@@ -1,12 +1,10 @@
 import React from 'react';
-import DrawerLeft from './components/Navs/Drawer';
-import Bar from './components/Navs/Bar';
+import Main from './components/Main';
 
 function App() {
   return (
     <div className="App">
-      <DrawerLeft />
-      <Bar />
+      <Main />
     </div>
   );
 }

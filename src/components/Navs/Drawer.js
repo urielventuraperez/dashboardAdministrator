@@ -16,10 +16,17 @@ import Flight from "@material-ui/icons/Flight";
 import MyLocation from "@material-ui/icons/MyLocation";
 import Landscape from "@material-ui/icons/Landscape";
 import Layers from "@material-ui/icons/Layers";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Redirect1 from "../Sections/TestRedirect1";
+import Redirect2 from "../Sections/TestRedirect2";
+import Home from "../Sections/Home";
 
 const drawerWidth = 220;
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
   menuButton: {
     marginRight: 0
   },
@@ -51,7 +58,14 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(2)
+    padding: theme.spacing(10)
+  },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginLeft: 0
   }
 }));
 
@@ -69,86 +83,93 @@ export default function DrawerLeft() {
   }
 
   return (
-    <div className={classes.root}>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
-        })}
-        classes={{
-          paper: clsx({
+    <Router>
+      <div className={classes.root}>
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open
-          })
-        }}
-        open={open}
-      >
-        <IconButton
-          aria-label="Open drawer"
-        >
-          <Landscape />
-        </IconButton>
-        <Divider />
-        <IconButton
-          aria-label="Open drawer"
-          onClick={handleDrawerOpen}
-          className={clsx(classes.menuButton, {
-            [classes.hide]: open
           })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
+            })
+          }}
+          open={open}
         >
-          <MenuIcon />
-        </IconButton>
-        <IconButton
-          style={{ justifyContent: "end" }}
-          onClick={handleDrawerClose}
-          className={clsx(classes.menuButton, {
-            [classes.hide]: !open
-          })}
-        >
-          {theme.direction === "rtl" ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
-        </IconButton>
-        <Divider />
-        <List>
+          <Link to="/">
+            <IconButton aria-label="Open drawer">
+              <Landscape />
+            </IconButton>
+          </Link>
+          <Divider />
+          <IconButton
+            aria-label="Open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
+          <IconButton
+            style={{ justifyContent: "end" }}
+            onClick={handleDrawerClose}
+            className={clsx(classes.menuButton, {
+              [classes.hide]: !open
+            })}
+          >
+            {theme.direction === "rtl" ? (
+              <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
+            )}
+          </IconButton>
+          <Divider />
+          <List>
+            <Link to="/redirect1">
+              <ListItem button>
+                <ListItemIcon>
+                  <People />
+                </ListItemIcon>
+                <ListItemText>Users</ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="/redirect2">
+              <ListItem button>
+                <ListItemIcon>
+                  <Flight />
+                </ListItemIcon>
+                <ListItemText>Tours</ListItemText>
+              </ListItem>
+            </Link>
             <ListItem button>
               <ListItemIcon>
-                <People />
-              </ListItemIcon>
-              <ListItemText>
-                Users
-              </ListItemText>
-            </ListItem>
-            <ListItem button>
-            <ListItemIcon>
-                <Flight />
-              </ListItemIcon>
-              <ListItemText>
-                Tours
-              </ListItemText>
-            </ListItem>
-            <ListItem button>
-            <ListItemIcon>
                 <MyLocation />
               </ListItemIcon>
-              <ListItemText>
-                Bookings
-              </ListItemText>
+              <ListItemText>Bookings</ListItemText>
             </ListItem>
             <ListItem button>
-            <ListItemIcon>
+              <ListItemIcon>
                 <Layers />
               </ListItemIcon>
-              <ListItemText>
-                Packages
-              </ListItemText>
+              <ListItemText>Packages</ListItemText>
             </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-    </div>
+          </List>
+          <Divider />
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open
+          })}
+        >
+          <Route exact path="/" component={Home} />
+          <Route path="/redirect1" component={Redirect1} />
+          <Route path="/redirect2" component={Redirect2} />
+        </main>
+      </div>
+    </Router>
   );
 }
