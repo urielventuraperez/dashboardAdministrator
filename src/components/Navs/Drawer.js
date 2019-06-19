@@ -17,8 +17,8 @@ import MyLocation from "@material-ui/icons/MyLocation";
 import Landscape from "@material-ui/icons/Landscape";
 import Layers from "@material-ui/icons/Layers";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Redirect1 from "../Sections/TestRedirect1";
-import Redirect2 from "../Sections/TestRedirect2";
+import Redirect1 from "../Sections/Tours";
+import Tours from "../Sections/Tours";
 import Home from "../Sections/Home";
 
 const drawerWidth = 220;
@@ -129,7 +129,7 @@ export default function DrawerLeft() {
           </IconButton>
           <Divider />
           <List>
-            <Link to="/redirect1">
+            <Link to="/users">
               <ListItem button>
                 <ListItemIcon>
                   <People />
@@ -137,7 +137,7 @@ export default function DrawerLeft() {
                 <ListItemText>Users</ListItemText>
               </ListItem>
             </Link>
-            <Link to="/redirect2">
+            <Link to="/tours">
               <ListItem button>
                 <ListItemIcon>
                   <Flight />
@@ -166,8 +166,8 @@ export default function DrawerLeft() {
           })}
         >
           <Route exact path="/" render={(props) => <Home {...props} value="18" />} />
-          <Route path="/redirect1" component={Redirect1} />
-          <Route path="/redirect2" component={Redirect2} />
+          <Route path="/users" component={Redirect1} />
+          <Route path="/tours" component={Tours} />
         </main>
       </div>
     </Router>
