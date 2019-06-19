@@ -1,8 +1,16 @@
 import React from 'react';
 
-const Home = () =>{
+const Home = ({ value }) =>{
+
+    const adding = (v) => {
+        return parseInt(v)+parseInt(v);
+    }
+
     return(
-        <p> El Home </p>
+       <div>
+           <p> {value} </p>
+           <p> { adding(value) } </p>
+       </div>
     )
 }
 
