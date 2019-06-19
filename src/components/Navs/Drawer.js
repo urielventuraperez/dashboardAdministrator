@@ -165,7 +165,7 @@ export default function DrawerLeft() {
             [classes.contentShift]: open
           })}
         >
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render={(props) => <Home {...props} value="18" />} />
           <Route path="/redirect1" component={Redirect1} />
           <Route path="/redirect2" component={Redirect2} />
         </main>
