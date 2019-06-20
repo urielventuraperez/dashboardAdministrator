@@ -9,7 +9,7 @@ const ConnectedList = ( {students} ) => (
     <ul className="list-group list-group-flush">
     {students.map(student => (
       <li className="list-group-item" key={student.id}>
-        {student.title}
+        {student.nombre}
       </li>
     ))}
   </ul>
